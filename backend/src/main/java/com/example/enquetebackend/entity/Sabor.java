@@ -26,7 +26,7 @@ public class Sabor {
     private String descricao;
 
     @Column(name = "PRECO")
-    private Integer preco;
+    private Double preco;
 
     @OneToMany(mappedBy = "sabor")
     @JsonBackReference

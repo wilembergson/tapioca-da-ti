@@ -28,18 +28,28 @@ public class Item {
     @Column(name = "QUANTIDADE")
     private Integer quantidade;
 
+    @Column(name = "PAGO")
+    private Boolean pago;
+
     @ManyToOne
-    @JoinColumn(name = "SABOR_ID")
+    @JoinColumn(name = "ID_SABOR")
     @JsonManagedReference
     private Sabor sabor;
 
-    public Item(String nomeCliente, Integer quantidade, Sabor sabor) {
+    @ManyToOne
+    @JoinColumn(name="ID_PEDIDO")
+    @JsonBackReference
+    private Pedido pedido;
+
+    public Item(String nomeCliente, Integer quantidade, Sabor sabor, Pedido pedido) {
         this.nomeCliente = nomeCliente;
         this.quantidade = quantidade;
+        this.pago = false;
         this.sabor = sabor;
+        this.pedido = pedido;
     }
 
-    public Integer getTotal(){
+    public Double getTotal(){
         return quantidade * sabor.getPreco();
     }
 }
