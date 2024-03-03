@@ -41,7 +41,7 @@ export type PedidoTipo = {
   pix:string
   status:string
   data:number[]
-  items:Item[]
+  itens:Item[]
   total:number
   totalPago:number
   totalAPagar:number
