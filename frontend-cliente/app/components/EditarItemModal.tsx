@@ -4,18 +4,10 @@ import Modal from "./Modal";
 import { Item, Sabor } from "../page";
 import { useGlobalContext } from "../contexts/Contexto";
 
-type Props = {
-    dados:Item
-}
-
-type UpdateEnquete = {
-    tempo: number;
-}
-
 export default function EditarItemModal() {
     const {item, setItem, showModal, setShowModal} = useGlobalContext()
     //const [item, setItem] = useState<Item>()
-    const [sabores, setSabores] = useState<Sabor>()
+    const [sabores, setSabores] = useState<Sabor[]>()
 
     function handleChange({ target }: any) {
         setItem({ ...item!, [target.name]: target.value })
@@ -24,6 +16,7 @@ export default function EditarItemModal() {
     async function obterSabores() {
         try {
             const response = await api.listarSabores()
+            console.log(response.data)
             setSabores(response.data)
         } catch (error: any) {
             alert(error)
@@ -66,12 +59,23 @@ export default function EditarItemModal() {
 
     return (
         <Modal isVisible={showModal}>
-            <div className="flex flex-col bg-white w-2/5 h-52 shadow-lg" data-aos="zoom-in">
+            <div className="flex flex-col bg-white w-full mx-10 h-52 shadow-lg" data-aos="zoom-in">
                 <h1 className="`flex font-black text-lg p-2 bg-[#581845] text-[#FF5733]">
                     Editar pedido
                 </h1>
                 <form className='flex flex-col p-4 bg-white'>
-                    
+                    {sabores !== undefined 
+                        ? <select id="seletor"
+                        className='flex mb-4 font-md bg-gray-100 p-2 rounded-md'>
+                        {sabores!.map(option => (
+                          <option className='flex mb-4 bg-blue-200 my-2 font-sm bg-gray-100 p-2 rounded-md'
+                                    key={option.id} value={option.id}>
+                            {option.descricao} - R${option.preco.toFixed(2)}
+                          </option>
+                        ))}
+                        </select>
+                        : <></>
+                    }
                     <input className='flex mb-4 bg-gray-100 p-2 rounded-md'
                         type="text"
                         placeholder='Duração (em minutos)'
@@ -89,10 +93,7 @@ export default function EditarItemModal() {
                         required
                     />
                     <div className="flex">
-                        {/*<button className={botaoStyle("bg-blue-500")}>
-                            Confirmar
-                        </button>*/}
-                        <button className='flex bg-red-500 font-white rounded-md p-2'
+                        <button className='flex bg-red-500 text-white font-white rounded-md p-2'
                             onClick={() => setShowModal(false)}>
                             Cancelar
                         </button>

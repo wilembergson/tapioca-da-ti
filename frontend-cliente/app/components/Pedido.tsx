@@ -19,8 +19,8 @@ export default function Pedido({dados}:Props){
                 </div>
                 <section className='flex justify-between w-full'>
                     <div>
-                        <h2 className='text-red-700'>Valor à pagar: R${dados.totalAPagar.toFixed(2)}</h2>
-                        <h2 className='text-green-700'>Valor pago: R${dados.totalPago.toFixed(2)}</h2>
+                        <h2 className='text-red-700'>Faltam pagar: R${dados.totalAPagar.toFixed(2)}</h2>
+                        <h2 className='text-green-700'>Já foi pago: R${dados.totalPago.toFixed(2)}</h2>
                     </div>
                     <div className='flex flex-col items-end font-bold'>
                         <h2>TOTAL</h2>
