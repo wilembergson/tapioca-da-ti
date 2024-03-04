@@ -1,5 +1,6 @@
 import {PedidoTipo} from '../page'
 import BotaoCopiar from './BotaoCopiar'
+import EditarItemModal from './EditarItemModal'
 import Item from './Item'
 
 type Props = {
@@ -27,7 +28,10 @@ export default function Pedido({dados}:Props){
                     </div>
                 </section>
             </div>
-            <div>{dados?.itens?.map(item => <Item dados={item}/>)}</div>
+            <div>{dados.itens.length !== 0
+                ? dados?.itens?.map(item => <Item dados={item}/>)
+                : <></>}</div>
+            <EditarItemModal/>
         </div>
     )
 }

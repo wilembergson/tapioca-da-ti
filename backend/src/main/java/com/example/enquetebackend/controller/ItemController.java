@@ -35,4 +35,10 @@ public class ItemController {
     public ResponseEntity<List<Item>> listar(){
         return ResponseEntity.ok(service.listarItens());
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Item> obterPorId(@PathVariable String id){
+        Item item = service.obterPorId(Integer.parseInt(id));
+        return ResponseEntity.ok(item);
+    }
 }

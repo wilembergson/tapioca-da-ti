@@ -2,11 +2,21 @@ import axios from "axios";
 import API_URL from "./api-url";
 
 async function getPedidoAtual(){
-    return await axios.get(`http://localhost:8080/pedido/atual`)
+    return await axios.get(`${API_URL}/pedido/atual`)
+}
+
+async function getItemPorId(id:number){
+    return await axios.get(`${API_URL}/item/${id}`)
+}
+
+async function listarSabores(){
+    return await axios.get(`${API_URL}/sabor/listar`)
 }
 
 const api = {
-    getPedidoAtual
+    getPedidoAtual,
+    getItemPorId,
+    listarSabores
 }
 
 export default api

@@ -5,6 +5,8 @@ import Header from "./components/Header";
 import api from "./api/api-connection";
 import Pedido from "./components/Pedido";
 import { TbShoppingCartX } from "react-icons/tb";
+import EditarItemModal from "./components/EditarItemModal";
+import { useGlobalContext } from "./contexts/Contexto";
 
 export default function Home() {
   const [pedido, setPedido] = useState<PedidoTipo>()

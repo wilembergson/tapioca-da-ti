@@ -48,4 +48,12 @@ public class ItemService {
     public List<Item> listarItens(){
         return itemRepository.findAll().stream().collect(Collectors.toList());
     }
+
+    public Item obterPorId(Integer id){
+        return itemRepository.findById(id)
+                .orElseThrow(() -> new ErroPadrao("Item não encontrado.", HttpStatus.CONFLICT));
+    }
+    public void atualizarItem(){
+
+    }
 }
