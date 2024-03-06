@@ -14,7 +14,8 @@ export default function Item({dados}:Props){
     }
 
     return(
-        <section className="flex cursor-pointer justify-between shadow-lg rounded-md bg-red-200 my-2 p-2" 
+        <section className={`flex cursor-pointer justify-between shadow-lg
+                    rounded-md my-2 p-2 ${dados.pago ? "bg-green-200" : "bg-red-200"}`} 
             onClick={editarItem}>
             <div className="flex flex-col w-full">
                 <h2 className="flex text-md">{dados.sabor.descricao}</h2>

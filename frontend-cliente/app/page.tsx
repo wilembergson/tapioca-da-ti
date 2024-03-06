@@ -53,6 +53,7 @@ export type Item = {
   id:number
   nomeCliente:string
   quantidade:number
+  pago: boolean
   sabor:Sabor
   total:number
 }
