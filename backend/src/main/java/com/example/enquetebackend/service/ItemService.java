@@ -1,5 +1,6 @@
 package com.example.enquetebackend.service;
 
+import com.example.enquetebackend.dto.AtualizarItemDTO;
 import com.example.enquetebackend.dto.NovoItemDTO;
 import com.example.enquetebackend.dto.VotoDTO;
 import com.example.enquetebackend.entity.*;
@@ -42,6 +43,17 @@ public class ItemService {
                 saborOp.get(),
                 pedidoOp.get()
         );
+        itemRepository.save(item);
+    }
+
+    public void atualizarItem(AtualizarItemDTO dto){
+        Optional<Item> itemOp = itemRepository.findById(dto.getId());
+        if(itemOp.isEmpty()) throw new ErroPadrao("Item não encontrado.", HttpStatus.NOT_FOUND);
+        Optional<Sabor> saborOp = saborRepository.findById(dto.getSabor_id());
+        if(saborOp.isEmpty()) throw new ErroPadrao("Sabor não encontrado.", HttpStatus.NOT_FOUND);
+        Item item = itemOp.get();
+        item.setSabor(saborOp.get());
+        item.setQuantidade(dto.getQuantidade());
         itemRepository.save(item);
     }
 

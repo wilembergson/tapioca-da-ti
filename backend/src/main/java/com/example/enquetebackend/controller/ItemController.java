@@ -1,5 +1,6 @@
 package com.example.enquetebackend.controller;
 
+import com.example.enquetebackend.dto.AtualizarItemDTO;
 import com.example.enquetebackend.dto.NovoItemDTO;
 import com.example.enquetebackend.dto.VotoDTO;
 import com.example.enquetebackend.entity.Item;
@@ -28,7 +29,13 @@ public class ItemController {
     @PostMapping
     public ResponseEntity<Object> novaResposta(@RequestBody NovoItemDTO dto){
         this.service.novoItem(dto);
-        return new ResponseEntity<>(Map.of("mensagem", "Novo voto adicionado."), HttpStatus.CREATED);
+        return new ResponseEntity<>(Map.of("mensagem", "Item adicionado."), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/atualizar")
+    public ResponseEntity<Object> atualizar(@RequestBody AtualizarItemDTO dto){
+        this.service.atualizarItem(dto);
+        return new ResponseEntity<>(Map.of("mensagem", "Item atualizado."), HttpStatus.OK);
     }
 
     @GetMapping("/listar")

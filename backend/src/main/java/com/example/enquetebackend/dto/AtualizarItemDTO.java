@@ -7,9 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class NovoItemDTO {
+public class AtualizarItemDTO {
 
-    private String nomeCliente;
+    private Integer id;
 
     private Integer quantidade;
 
