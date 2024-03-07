@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
-import api from "../api/api-connection";
+import api, { AtualizarItem } from "../api/api-connection";
 import Modal from "./Modal";
 import { Item, Sabor } from "../page";
 import { useGlobalContext } from "../contexts/Contexto";
 
 export default function EditarItemModal() {
     const {item, setItem, showModal, setShowModal} = useGlobalContext()
-    //const [item, setItem] = useState<Item>()
+    const [itemAtual, setItemAtual] = useState<Item>(item!)
     const [sabores, setSabores] = useState<Sabor[]>()
-    const [saborAtual, setSaborAtual] = useState<Sabor>()
+    const [saborAtual, setSaborAtual] = useState<Sabor>(item?.sabor!)
+    //const [quantidade, setQuantidade] = useState<number>()
 
     function handleChange({ target }: any) {
         setItem({ ...item!, [target.name]: target.value })
@@ -28,34 +29,23 @@ export default function EditarItemModal() {
         }
     }
 
-
-
-    /*function confirmarAtualizacao(event: any) {
+    async function atualizar(event: React.MouseEvent<HTMLButtonElement>) {
         event.preventDefault()
-        alerts.ConfirmarAlert(
-            atualizarEnquete,
-            'Cofirmar atualização?',
-            'As mudanças seram exibidas na votação.'
-        )
-    }*/
-
-    /*async function atualizarEnquete() {
+        const dados:AtualizarItem = {
+            id:item!.id,
+            quantidade: item!.quantidade,
+            sabor_id: saborAtual!.id
+        }
         try {
-            const response = await api.atualizarEnquete(enquete?.tempo!)
-            setEnqueteAtiva({
-                id: enqueteAtiva?.id!,
-                pergunta: enqueteAtiva!.pergunta!,
-                tempo: enquete.tempo,
-                ativo: enqueteAtiva?.ativo!,
-                data_hora: enqueteAtiva?.data_hora!
-            })
-            setVisible(false)
+            const response = await api.atualizarItem(dados)
+            setItem(null)
+            setShowModal(false)
             //alerts.SucessoAlert(response.data.mensagem)
         } catch (error: any) {
             alert(error)
             //alerts.ErrorAlert(error.response.data.mensagem)
         }
-    }*/
+    }
 
     function cancelar(){
         setShowModal(false)
@@ -63,9 +53,8 @@ export default function EditarItemModal() {
 
     useEffect(() => {
         obterSabores()
-        alert(item?.sabor.descricao)
         setSaborAtual(item?.sabor!)
-    }, [])
+    }, [item?.quantidade])
 
     return (
         <Modal isVisible={showModal}>
@@ -98,6 +87,10 @@ export default function EditarItemModal() {
                         required
                     />
                     <div className="flex">
+                        <button className='flex bg-blue-500 text-white font-white rounded-md p-2 mr-2'
+                            onClick={atualizar}>
+                            Atualizar
+                        </button>
                         <button className='flex bg-red-500 text-white font-white rounded-md p-2'
                             onClick={() => cancelar()}>
                             Cancelar

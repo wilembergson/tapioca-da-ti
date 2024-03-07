@@ -9,17 +9,17 @@ import EditarItemModal from "./components/EditarItemModal";
 import { useGlobalContext } from "./contexts/Contexto";
 
 export default function Home() {
+  const {item} = useGlobalContext()
   const [pedido, setPedido] = useState<PedidoTipo>()
 
   async function obterPedido(){
     const pedido = await api.getPedidoAtual()
-    console.log(pedido.data)
     setPedido(pedido.data)
   }
 
   useEffect(() => {
     obterPedido()
-  },[])
+  },[item])
 
   return (
     <main className="flex min-h-screen flex-col items-center pb-20">

@@ -1,3 +1,4 @@
+import { useGlobalContext } from '../contexts/Contexto'
 import {PedidoTipo} from '../page'
 import BotaoCopiar from './BotaoCopiar'
 import EditarItemModal from './EditarItemModal'
