@@ -22,6 +22,7 @@ export default function NovoItemModal({obterPedido}:Props) {
         try {
             const response = await api.listarSabores()
             setSabores(response.data)
+            setSaborAtual(response.data[0])
         } catch (error: any) {
             alert(error)
             //alerts.ErrorAlert(error.response.data.mensagem)
@@ -65,6 +66,7 @@ export default function NovoItemModal({obterPedido}:Props) {
                     {sabores !== undefined 
                         ? <select id="seletor"
                                 className='flex mb-4 font-md bg-gray-100 p-2 rounded-md'
+                                defaultValue={saborAtual!.id}
                                 onChange={(e) => mudarSabor(parseInt(e.target.value))}
                             >
                         {sabores!.map(option => (
