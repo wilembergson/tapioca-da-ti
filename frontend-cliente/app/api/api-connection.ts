@@ -7,6 +7,11 @@ export type AtualizarItem = {
     sabor_id:number
 }
 
+export type NovoItem = {
+    nomeCliente:string,
+    quantidade: number|undefined,
+    sabor_id:number|undefined
+}
 async function getPedidoAtual(){
     return await axios.get(`${API_URL}/pedido/atual`)
 }
@@ -16,8 +21,11 @@ async function getItemPorId(id:number){
 }
 
 async function atualizarItem(data:AtualizarItem){
-    return await axios.put(`${API_URL}/item/atualizar`,    data
-    )
+    return await axios.put(`${API_URL}/item/atualizar`, data)
+}
+
+async function novoItem(data:NovoItem){
+    return await axios.post(`${API_URL}/item`, data)
 }
 
 async function listarSabores(){
@@ -28,7 +36,8 @@ const api = {
     getPedidoAtual,
     getItemPorId,
     listarSabores,
-    atualizarItem
+    atualizarItem,
+    novoItem
 }
 
 export default api

@@ -2,13 +2,16 @@
 
 import { useEffect, useState } from "react";
 import Header from "./components/Header";
-import api from "./api/api-connection";
+import api, { NovoItem } from "./api/api-connection";
 import Pedido from "./components/Pedido";
 import { TbShoppingCartX } from "react-icons/tb";
-import { useGlobalContext } from "./contexts/Contexto";
+import { useGlobalContext } from "./contexts/Contexto"
+import { BsCartPlusFill } from "react-icons/bs";
+import NovoItemModal from "./components/NovoItemModal";
+
 
 export default function Home() {
-  const {item} = useGlobalContext()
+  const {item, setShowNovoItemModal} = useGlobalContext()
   const [nomeUsuario, setNomeUsuario] = useState<string|null>(null)
   const [nomeHadleChange, setNomeHandleChange] = useState<string>('')
   const [pedido, setPedido] = useState<PedidoTipo>()
@@ -30,7 +33,7 @@ export default function Home() {
   useEffect(() => {
     obterPedido()
     obterNomeLocalStorage()
-  },[item, nomeUsuario])
+  },[pedido, item, nomeUsuario])
 
   return (
     <main className="flex min-h-screen flex-col items-center pb-20">
@@ -68,6 +71,15 @@ export default function Home() {
                 </form>
             </div>  
         }
+        {nomeUsuario ? 
+          <button className="fixed right-4 bottom-4 bg-blue-400 w-auto rounded-full
+                  text-white justify-center p-4 shadow-md z-10"
+                  onClick={() => setShowNovoItemModal(true)}>
+          <BsCartPlusFill size={34}/>
+        </button> 
+        : <></>
+      }
+      <NovoItemModal obterPedido={obterPedido}/>
     </main>
   );
 }
