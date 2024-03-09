@@ -3,6 +3,7 @@ import api, { AtualizarItem, NovoItem } from "../api/api-connection";
 import Modal from "./Modal";
 import { Item, Sabor } from "../page";
 import { useGlobalContext } from "../contexts/Contexto";
+import { erroMessage, sucessMessage } from "../utils/Toasts";
 
 type Props = {
     obterPedido:any
@@ -41,10 +42,10 @@ export default function NovoItemModal({obterPedido}:Props) {
             const response = await api.novoItem(dados)
             obterPedido()
             setShowNovoItemModal(false)
-            //alerts.SucessoAlert(response.data.mensagem)
+            sucessMessage(response.data.mensagem)
         } catch (error: any) {
             alert(error)
-            //alerts.ErrorAlert(error.response.data.mensagem)
+            erroMessage(error.response.data.mensagem)
         }
     }
 

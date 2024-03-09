@@ -21,7 +21,7 @@ async function getItemPorId(id:number){
 }
 
 async function deletarItemPorId(id:number){
-    await axios.delete(`${API_URL}/item/${id}`)
+    return await axios.delete(`${API_URL}/item/${id}`)
 }
 
 async function atualizarItem(data:AtualizarItem){

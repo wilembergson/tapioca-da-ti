@@ -1,4 +1,3 @@
-import { useGlobalContext } from '../contexts/Contexto'
 import {PedidoTipo} from '../page'
 import BotaoCopiar from './BotaoCopiar'
 import EditarItemModal from './EditarItemModal'
@@ -11,6 +10,7 @@ type Props = {
 export default function Pedido({dados}:Props){
     return(
         <div className='flex flex-col p-2 m-4 md:w-4/5 w-full rounded-md '>
+            
             <div className='flex flex-col bg-white shadow-md rounded-md w-full p-2 mb-4'>
                 <div className='flex justify-between'>
                     <h1 className='flex text-2xl mb-4 font-bold'>

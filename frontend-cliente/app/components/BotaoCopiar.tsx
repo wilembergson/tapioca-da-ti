@@ -1,6 +1,9 @@
 import React, { useRef, useEffect } from 'react';
 import Clipboard from 'clipboard';
 import { FaRegCopy } from "react-icons/fa";
+import { erroMessage, sucessMessage } from '../utils/Toasts';
+import { ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 type CopyButtonProps = {
   textToCopy: string;
@@ -17,11 +20,11 @@ export default function BotaoCopiar({ textToCopy }:CopyButtonProps){
       });
 
       clipboard.on('success', () => {
-        alert('PIX copiado!');
+        sucessMessage('PIX copiado.')
       });
 
       clipboard.on('error', () => {
-        alert('Erro ao copiar o texto!');
+        erroMessage('Erro ao copiar o texto!');
       });
     }
 
@@ -34,6 +37,7 @@ export default function BotaoCopiar({ textToCopy }:CopyButtonProps){
 
   return (
     <button className='flex' ref={buttonRef}>
+        <ToastContainer/>
         <FaRegCopy size={28}/>
     </button>
   );

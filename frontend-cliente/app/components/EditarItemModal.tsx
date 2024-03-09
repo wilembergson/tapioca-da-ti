@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
 import api, { AtualizarItem } from "../api/api-connection";
 import Modal from "./Modal";
-import { Item, Sabor } from "../page";
+import { Sabor } from "../page";
 import { useGlobalContext } from "../contexts/Contexto";
+import { erroMessage, sucessMessage } from "../utils/Toasts";
 
 export default function EditarItemModal() {
     const {item, setItem, showModal, setShowModal} = useGlobalContext()
-    const [itemAtual, setItemAtual] = useState<Item>(item!)
     const [sabores, setSabores] = useState<Sabor[]>()
     const [saborAtual, setSaborAtual] = useState<Sabor>(item?.sabor!)
-    //const [quantidade, setQuantidade] = useState<number>()
 
     function handleChange({ target }: any) {
         setItem({ ...item!, [target.name]: target.value })
@@ -24,8 +23,7 @@ export default function EditarItemModal() {
             const response = await api.listarSabores()
             setSabores(response.data)
         } catch (error: any) {
-            alert(error)
-            //alerts.ErrorAlert(error.response.data.mensagem)
+            erroMessage(error.response.data.mensagem)
         }
     }
 
@@ -40,10 +38,10 @@ export default function EditarItemModal() {
             const response = await api.atualizarItem(dados)
             setItem(null)
             setShowModal(false)
-            //alerts.SucessoAlert(response.data.mensagem)
+            sucessMessage(response.data.mensagem)
         } catch (error: any) {
             alert(error)
-            //alerts.ErrorAlert(error.response.data.mensagem)
+            erroMessage(error.response.data.mensagem)
         }
     }
 

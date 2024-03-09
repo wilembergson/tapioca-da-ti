@@ -4,13 +4,14 @@ import { Item } from "../page"
 import { AiFillEdit } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md"
 import api from "../api/api-connection";
+import { erroMessage, sucessMessage } from "../utils/Toasts";
 
 type Props = {
     dados: Item
 }
 
 export default function Item({dados}:Props){
-    const {item, setItem, showModal, setShowModal} = useGlobalContext()
+    const {setItem, setShowModal} = useGlobalContext()
     const [nomeUsuario, setNomeUsuaio] = useState(localStorage.getItem("nomeUsuario"))
 
     function editarItem(){ 
@@ -22,11 +23,11 @@ export default function Item({dados}:Props){
 
     async function deletarItem(){ 
         try{
-            await api.deletarItemPorId(dados.id)
+            const response = await api.deletarItemPorId(dados.id)
             setItem(dados)
-        }catch(e:any){
-            console.log(e)
-            alert(e)
+            sucessMessage(response.data.mensagem)
+        }catch(error:any){
+            erroMessage(error.response.data.mensagem)
         }
     }
 
