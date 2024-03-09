@@ -14,13 +14,13 @@ export default function Header(){
         nome ? setNomeUsuario(nome) : setNomeUsuario(null)
     }, [nomeUsuario])
     return(
-        <header className="flex bg-[#581845] w-full justify-between py-4 px-2 shadow-md">
-            <h1 className="text-[#FF5733] text-2xl font-bold">
+        <header className="flex bg-azul w-full justify-between py-4 px-2 shadow-md">
+            <h1 className="text-laranja text-2xl font-bold">
                 Tapioca da T.I
             </h1>
             {nomeUsuario !== null ? 
-                <div className="flex text-[#FF5733] text-md items-center">
-                    <h3 className="text-[#FF5733] text-md mr-1">
+                <div className="flex text-laranja text-md items-center">
+                    <h3 className=" text-md font-bold mr-1">
                         {nomeUsuario}
                     </h3> 
                     <button onClick={() => logout()}>

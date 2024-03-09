@@ -59,11 +59,11 @@ export default function NovoItemModal({obterPedido}:Props) {
 
     return (
         <Modal isVisible={showNovoItemModal}>
-            <div className="flex flex-col bg-white w-full mx-10 h-52 shadow-lg" data-aos="zoom-in">
-                <h1 className="`flex font-black text-lg p-2 bg-[#581845] text-[#FF5733]">
+            <div className="flex flex-col bg-white w-full mx-10 h-52 shadow-lg rounded-lg" data-aos="zoom-in">
+                <h1 className="`flex font-black text-lg p-2 bg-azul text-laranja rounded-t-lg">
                     Novo pedido
                 </h1>
-                <form className='flex flex-col p-4 bg-white'>
+                <form className='flex flex-col p-4 bg-white rounded-lg'>
                     {sabores !== undefined 
                         ? <select id="seletor"
                                 className='flex mb-4 font-md bg-gray-100 p-2 rounded-md'

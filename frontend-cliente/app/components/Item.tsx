@@ -37,8 +37,8 @@ export default function Item({dados}:Props){
     },[])
 
     return(
-        <section className={`flex cursor-pointer justify-between shadow-lg
-                    rounded-md my-2 p-2 ${dados.pago ? "bg-green-200" : "bg-red-200"}`}
+        <section className={`flex cursor-pointer justify-between shadow-lg rounded-md my-2 p-2
+        ${dados.pago ? "bg-green-200 text-green-900" : "bg-red-200 text-red-900"}`}
                     >
             <div className="flex flex-col w-full">
                 <h2 className="flex text-md">{dados.sabor.descricao}</h2>
