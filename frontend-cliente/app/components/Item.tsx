@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react"
 import { useGlobalContext } from "../contexts/Contexto"
 import { Item } from "../page"
-import { FaRegEdit } from "react-icons/fa"
+import { AiFillEdit } from "react-icons/ai";
+import { MdDeleteForever } from "react-icons/md"
+import api from "../api/api-connection";
 
 type Props = {
     dados: Item
@@ -18,10 +20,20 @@ export default function Item({dados}:Props){
         }
     }
 
+    async function deletarItem(){ 
+        try{
+            await api.deletarItemPorId(dados.id)
+            setItem(dados)
+        }catch(e:any){
+            console.log(e)
+            alert(e)
+        }
+    }
+
     useEffect(() => {
         const nome = localStorage.getItem("nomeUsuario")
         setNomeUsuaio(nome)
-    })
+    },[])
 
     return(
         <section className={`flex cursor-pointer justify-between shadow-lg
@@ -37,19 +49,22 @@ export default function Item({dados}:Props){
             <div className="flex flex-col items-center">
                 <h2 className="flex text-lg font-bold">R${dados.sabor.preco.toFixed(2)}</h2>
                 {nomeUsuario === dados.nomeCliente ?
-                    <div className="flex items-center mt-4 bg-yellow-600 text-white
-                                     rounded-md shadow-xl p-2"
+                    <section className="flex">
+                        <div className="flex items-center bg-yellow-600
+                                    text-white rounded-md shadow-md p-2 mr-1"
                                      onClick={editarItem}>
-                        <FaRegEdit size={26}/>
-                        <h2 className="flex font-bold ml-1">
-                            Editar
-                        </h2>
+                            <AiFillEdit size={26}/>
+                        </div>
+                        <div className="flex items-center bg-red-600
+                                    text-white rounded-md shadow-md p-2"
+                                     onClick={deletarItem}>
+                        <MdDeleteForever size={30}/>
                     </div>
+                    </section>
+                    
                     : <></>
                 }
             </div>
-
-            
         </section>
     )
 }

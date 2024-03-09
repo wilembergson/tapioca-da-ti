@@ -65,7 +65,8 @@ public class ItemService {
         return itemRepository.findById(id)
                 .orElseThrow(() -> new ErroPadrao("Item não encontrado.", HttpStatus.CONFLICT));
     }
-    public void atualizarItem(){
-
+    public void deletarPorId(Integer id){
+        obterPorId(id);
+        itemRepository.deleteById(id);
     }
 }

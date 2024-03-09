@@ -48,4 +48,10 @@ public class ItemController {
         Item item = service.obterPorId(Integer.parseInt(id));
         return ResponseEntity.ok(item);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deletarPorId(@PathVariable String id){
+        service.deletarPorId(Integer.parseInt(id));
+        return ResponseEntity.ok(Map.of("mensagem", "Item deletado do pedido."));
+    }
 }

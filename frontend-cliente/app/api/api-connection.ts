@@ -20,6 +20,10 @@ async function getItemPorId(id:number){
     return await axios.get(`${API_URL}/item/${id}`)
 }
 
+async function deletarItemPorId(id:number){
+    await axios.delete(`${API_URL}/item/${id}`)
+}
+
 async function atualizarItem(data:AtualizarItem){
     return await axios.put(`${API_URL}/item/atualizar`, data)
 }
@@ -37,7 +41,8 @@ const api = {
     getItemPorId,
     listarSabores,
     atualizarItem,
-    novoItem
+    novoItem,
+    deletarItemPorId
 }
 
 export default api

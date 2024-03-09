@@ -1,5 +1,7 @@
 'use client'
 
+import 'aos/dist/aos.css'
+import Aos from 'aos'
 import { useEffect, useState } from "react";
 import Header from "./components/Header";
 import api, { NovoItem } from "./api/api-connection";
@@ -15,6 +17,10 @@ export default function Home() {
   const [nomeUsuario, setNomeUsuario] = useState<string|null>(null)
   const [nomeHadleChange, setNomeHandleChange] = useState<string>('')
   const [pedido, setPedido] = useState<PedidoTipo>()
+
+  useEffect(() => {
+    Aos.init({ duration: 500 })
+  }, [])
 
   async function obterPedido(){
     const pedido = await api.getPedidoAtual()
