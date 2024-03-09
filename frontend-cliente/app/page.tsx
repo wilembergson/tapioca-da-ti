@@ -73,7 +73,7 @@ export default function Home() {
         }
         {nomeUsuario ? 
           <button className="fixed right-4 bottom-4 bg-blue-400 w-auto rounded-full
-                  text-white justify-center p-4 shadow-md z-10"
+                  text-white justify-center p-4 shadow-[5px 7px 9px -1px rgba(0,0,0,0.75)] z-10"
                   onClick={() => setShowNovoItemModal(true)}>
           <BsCartPlusFill size={34}/>
         </button> 
