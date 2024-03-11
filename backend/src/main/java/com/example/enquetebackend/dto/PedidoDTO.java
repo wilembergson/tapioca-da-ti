@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class NovoPedidoDTO {
+public class PedidoDTO {
 
     private String pix;
 }

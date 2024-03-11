@@ -1,6 +1,6 @@
 package com.example.enquetebackend.service;
 
-import com.example.enquetebackend.dto.NovoPedidoDTO;
+import com.example.enquetebackend.dto.PedidoDTO;
 import com.example.enquetebackend.entity.Pedido;
 import com.example.enquetebackend.exceptions.ErroPadrao;
 import com.example.enquetebackend.repository.PedidoRepository;
@@ -18,13 +18,21 @@ public class PedidoService {
     @Autowired
     private PedidoRepository pedidoRepository;
 
-    public void novoPedido(NovoPedidoDTO dto){
+    public void novoPedido(PedidoDTO dto){
         if(obterPedidoEmCriacao() != null)
             throw new ErroPadrao("Existe um pedido sem ser finalizado.", HttpStatus.CONFLICT);
         Pedido pedido = new Pedido(
                 dto.getPix(),
                 LocalDateTime.now()
         );
+        pedidoRepository.save(pedido);
+    }
+
+    public void atualizarPix(PedidoDTO dto){
+        Pedido pedido = obterPedidoEmCriacao();
+        if(pedido == null)
+            throw new ErroPadrao("Nenhum pedido sendo montado no momento.", HttpStatus.NOT_FOUND);
+        pedido.setPix(dto.getPix());
         pedidoRepository.save(pedido);
     }
 

@@ -1,17 +1,13 @@
 package com.example.enquetebackend.controller;
 
-import com.example.enquetebackend.dto.NovoItemDTO;
-import com.example.enquetebackend.dto.NovoPedidoDTO;
-import com.example.enquetebackend.entity.Item;
+import com.example.enquetebackend.dto.PedidoDTO;
 import com.example.enquetebackend.entity.Pedido;
-import com.example.enquetebackend.service.ItemService;
 import com.example.enquetebackend.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -25,9 +21,15 @@ public class PedidoController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> novoPedido(@RequestBody NovoPedidoDTO dto){
+    public ResponseEntity<Object> novoPedido(@RequestBody PedidoDTO dto){
         this.service.novoPedido(dto);
         return new ResponseEntity<>(Map.of("mensagem", "Novo pedido criado."), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/atualizar-pix")
+    public ResponseEntity<Object> atualizarPix(@RequestBody PedidoDTO dto){
+        this.service.atualizarPix(dto);
+        return new ResponseEntity<>(Map.of("mensagem", "Pix atualizado."), HttpStatus.OK);
     }
 
     @GetMapping("/atual")
