@@ -57,6 +57,18 @@ public class ItemService {
         itemRepository.save(item);
     }
 
+    public void mudarStatusPagamento(Integer id){
+        Optional<Item> itemOp = itemRepository.findById(id);
+        if(itemOp.isEmpty()) throw new ErroPadrao("Item não encontrado.", HttpStatus.NOT_FOUND);
+        Item item = itemOp.get();
+        if(item.getPago().equals(false)){
+            item.setPago(true);
+        }else{
+            item.setPago(false);
+        }
+        itemRepository.save(item);
+    }
+
     public List<Item> listarItens(){
         return itemRepository.findAll().stream().collect(Collectors.toList());
     }

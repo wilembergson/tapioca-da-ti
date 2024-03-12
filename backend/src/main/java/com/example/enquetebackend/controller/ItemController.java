@@ -38,6 +38,12 @@ public class ItemController {
         return new ResponseEntity<>(Map.of("mensagem", "Item atualizado."), HttpStatus.OK);
     }
 
+    @PutMapping("/atualizar-status/{id}")
+    public ResponseEntity<Object> mudarStatusPagamento(@PathVariable String id){
+        service.mudarStatusPagamento(Integer.parseInt(id));
+        return ResponseEntity.ok(Map.of("mensagem", "Status atualizado."));
+    }
+
     @GetMapping("/listar")
     public ResponseEntity<List<Item>> listar(){
         return ResponseEntity.ok(service.listarItens());
