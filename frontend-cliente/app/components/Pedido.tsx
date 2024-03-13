@@ -9,7 +9,7 @@ type Props = {
 
 export default function Pedido({dados}:Props){
     return(
-            <div className='flex flex-col p-2 m-4 md:w-4/5 w-full rounded-md text-gray-clear'>
+            <div className='flex flex-col p-2 m-4 md:w-4/5 w-full rounded-md text-azul'>
                 <div className='flex flex-col bg-white shadow-md rounded-md w-full p-2 mb-4'>
                     <div className='flex justify-between'>
                         <h1 className='flex text-2xl mb-4 font-bold'>
@@ -17,6 +17,9 @@ export default function Pedido({dados}:Props){
                         </h1>
                         <BotaoCopiar textToCopy={dados.pix}/>
                     </div>
+                    <h1 className='mb-2'>
+                        STATUS: <strong>{dados.status}</strong>
+                    </h1>
                     <section className='flex justify-between w-full'>
                         <div>
                             <h2 className='text-red-700'>Faltam pagar: R${dados.totalAPagar.toFixed(2)}</h2>

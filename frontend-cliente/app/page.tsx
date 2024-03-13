@@ -61,7 +61,7 @@ export default function Home() {
             <div className="flex mt-10">
                 <form className="flex flex-col justify-center"
                       onSubmit={setarNomeUsuario}>
-                  <h2 className="flex text-xl justify-center">
+                  <h2 className="flex text-azul font-bold text-xl justify-center">
                     Bota teu nome aí
                   </h2>
                   <input className='flex my-4 bg-gray-100 p-2 rounded-md'
@@ -71,7 +71,8 @@ export default function Home() {
                     value={item?.quantidade}
                     required
                 />
-                <button className="flex bg-blue-400 w-auto rounded-md text-white justify-center p-2">
+                <button className="flex bg-laranja w-auto rounded-md text-azul
+                      font-bold justify-center p-2">
                   Entrar
                 </button>
                 </form>

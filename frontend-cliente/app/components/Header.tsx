@@ -14,7 +14,7 @@ export default function Header(){
         nome ? setNomeUsuario(nome) : setNomeUsuario(null)
     }, [nomeUsuario])
     return(
-        <header className="flex bg-azul w-full justify-between py-4 px-2 shadow-md">
+        <header className="flex font-header bg-azul w-full justify-between py-4 px-2 shadow-md">
             <h1 className="text-laranja text-2xl font-bold">
                 Tapioca da T.I
             </h1>

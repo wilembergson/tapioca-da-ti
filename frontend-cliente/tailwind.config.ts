@@ -8,13 +8,13 @@ const config: Config = {
   ],
   theme: {
     fontFamily: {
-      'principal': ['Outfit', 'sans-serif']
+      'header': ['Madimi One', 'sans-serif']
     },
     extend: {
       colors: {
         'creme': '#F9E79F',
         'laranja': '#F5B041',
-        'azul': '#5DADE2',
+        'azul': '#7D3174',
         'gray': '#424242',
         'gray-clear': '#585858',
         'gray-clear-2': '#848484'
