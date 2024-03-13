@@ -42,4 +42,10 @@ public class PedidoController {
     public ResponseEntity<Pedido> listar(){
         return ResponseEntity.ok(service.obterPedidoEmCriacao());
     }
+
+    @DeleteMapping("/deletar")
+    public ResponseEntity<Object> deletar(){
+        service.deletar();
+        return ResponseEntity.ok(Map.of("mensagem", "Pedido deletado."));
+    }
 }

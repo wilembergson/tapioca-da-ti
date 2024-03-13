@@ -47,4 +47,10 @@ public class PedidoService {
         pedido.setStatus(PedidoStatus.getById(statusId).getDescricao());
         pedidoRepository.save(pedido);
     }
+
+    public void deletar(){
+        Pedido pedido = obterPedidoEmCriacao();
+        if(pedido == null) throw new ErroPadrao("Pedido não encontrado.", HttpStatus.NOT_FOUND);
+        pedidoRepository.delete(pedido);
+    }
 }
