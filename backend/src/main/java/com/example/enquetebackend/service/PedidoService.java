@@ -37,7 +37,14 @@ public class PedidoService {
     }
 
     public Pedido obterPedidoEmCriacao(){
-        Optional<Pedido> pedido = pedidoRepository.findByStatus(PedidoStatus.CRIANDO.getDescricao());
+        Optional<Pedido> pedido = pedidoRepository.findAll().stream().findFirst();
         return pedido.orElse(null);
+    }
+
+    public void atualizarStatus(Integer statusId){
+        Pedido pedido = obterPedidoEmCriacao();
+        if(pedido == null) throw new ErroPadrao("Pedido não encontrado.", HttpStatus.NOT_FOUND);
+        pedido.setStatus(PedidoStatus.getById(statusId).getDescricao());
+        pedidoRepository.save(pedido);
     }
 }

@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 public enum PedidoStatus {
     CRIANDO(1, "CRIANDO"),
     FEITO(2, "FEITO"),
-    EM_TRANSPORTE(3, "EM TRANSPORTE"),
+    EM_TRANSPORTE(3, "À CAMINHO"),
     ENTREGUE(4, "ENTREGUE"),
     FINALIZADO(5, "FINALIZADO");
 

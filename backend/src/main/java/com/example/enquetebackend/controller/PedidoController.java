@@ -32,6 +32,12 @@ public class PedidoController {
         return new ResponseEntity<>(Map.of("mensagem", "Pix atualizado."), HttpStatus.OK);
     }
 
+    @PutMapping("/atualizar-status/{statusId}")
+    public ResponseEntity<Object> atualizarStatus(@PathVariable String statusId){
+        this.service.atualizarStatus(Integer.parseInt(statusId));
+        return new ResponseEntity<>(Map.of("mensagem", "Status atualizado."), HttpStatus.OK);
+    }
+
     @GetMapping("/atual")
     public ResponseEntity<Pedido> listar(){
         return ResponseEntity.ok(service.obterPedidoEmCriacao());
