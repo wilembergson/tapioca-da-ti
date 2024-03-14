@@ -78,7 +78,7 @@ export default function Home() {
                 </form>
             </div>  
         }
-        {nomeUsuario ? 
+        {(nomeUsuario && pedido?.status === 'CRIANDO') ? 
           <button className="fixed right-4 bottom-4 bg-blue-400 w-auto rounded-full
                   text-white justify-center p-4 shadow-[5px 7px 9px -1px rgba(0,0,0,0.75)] z-10"
                   onClick={() => setShowNovoItemModal(true)}>

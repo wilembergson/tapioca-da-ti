@@ -32,7 +32,11 @@ export default function Pedido({dados}:Props){
                     </section>
                 </div>
                 <div>{dados.itens.length !== 0
-                    ? dados?.itens?.map(item => <Item key={item.id} dados={item}/>)
+                    ? dados?.itens?.map(item => 
+                        <Item key={item.id}
+                                dados={item}
+                                statusPedido={dados.status}
+                        />)
                     : <></>}
                 </div>
                 <EditarItemModal/>

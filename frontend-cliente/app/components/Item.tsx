@@ -8,9 +8,10 @@ import { erroMessage, sucessMessage } from "../utils/Toasts";
 
 type Props = {
     dados: Item
+    statusPedido:string
 }
 
-export default function Item({dados}:Props){
+export default function Item({dados, statusPedido}:Props){
     const {setItem, setShowModal} = useGlobalContext()
     const [nomeUsuario, setNomeUsuaio] = useState(localStorage.getItem("nomeUsuario"))
 
@@ -49,7 +50,7 @@ export default function Item({dados}:Props){
             </div>
             <div className="flex flex-col items-center">
                 <h2 className="flex text-lg font-bold">R${dados.sabor.preco.toFixed(2)}</h2>
-                {nomeUsuario === dados.nomeCliente ?
+                {(nomeUsuario === dados.nomeCliente && statusPedido === 'CRIANDO') ?
                     <section className="flex">
                         <div className="flex items-center bg-yellow-600
                                     text-white rounded-md shadow-md p-2 mr-1"
