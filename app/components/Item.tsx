@@ -5,6 +5,7 @@ import { AiFillEdit } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md"
 import api from "../api/api-connection";
 import { erroMessage, sucessMessage } from "../utils/Toasts";
+import LoaderCircle from "./LoaderCircle";
 
 type Props = {
     dados: Item
@@ -13,6 +14,7 @@ type Props = {
 
 export default function Item({dados, statusPedido}:Props){
     const {setItem, setShowModal} = useGlobalContext()
+    const [loading, setLoading] = useState(false)
     const [nomeUsuario, setNomeUsuaio] = useState(localStorage.getItem("nomeUsuario"))
 
     function editarItem(){ 
@@ -23,11 +25,14 @@ export default function Item({dados, statusPedido}:Props){
     }
 
     async function deletarItem(){ 
+        setLoading(true)
         try{
             const response = await api.deletarItemPorId(dados.id)
             setItem(dados)
             sucessMessage(response.data.mensagem)
+            setLoading(false)
         }catch(error:any){
+            setLoading(false)
             erroMessage(error.response.data.mensagem)
         }
     }
@@ -51,18 +56,23 @@ export default function Item({dados, statusPedido}:Props){
             <div className="flex flex-col items-center">
                 <h2 className="flex text-lg font-bold">R${dados.sabor.preco.toFixed(2)}</h2>
                 {(nomeUsuario === dados.nomeCliente && statusPedido === 'CRIANDO') ?
-                    <section className="flex">
-                        <div className="flex items-center bg-yellow-600
-                                    text-white rounded-md shadow-md p-2 mr-1"
-                                     onClick={editarItem}>
-                            <AiFillEdit size={26}/>
-                        </div>
-                        <div className="flex items-center bg-red-600
-                                    text-white rounded-md shadow-md p-2"
-                                     onClick={deletarItem}>
-                        <MdDeleteForever size={30}/>
-                    </div>
-                    </section>
+                    <>
+                        {!loading ? 
+                            <section className="flex">
+                                <div className="flex items-center bg-yellow-600
+                                            text-white rounded-md shadow-md p-2 mr-1"
+                                             onClick={editarItem}>
+                                    <AiFillEdit size={26}/>
+                                </div>
+                                <div className="flex items-center bg-red-600
+                                            text-white rounded-md shadow-md p-2"
+                                             onClick={deletarItem}>
+                                    <MdDeleteForever size={30}/>
+                                </div>
+                            </section>
+                            : <LoaderCircle/>
+                        }
+                    </>
                     
                     : <></>
                 }

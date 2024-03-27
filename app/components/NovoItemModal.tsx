@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import api, { AtualizarItem, NovoItem } from "../api/api-connection";
+import api, { NovoItem } from "../api/api-connection";
 import Modal from "./Modal";
-import { Item, Sabor } from "../page";
+import { Sabor } from "../page";
 import { useGlobalContext } from "../contexts/Contexto";
 import { erroMessage, sucessMessage } from "../utils/Toasts";
+import LoaderCircle from "./LoaderCircle";
 
 type Props = {
     obterPedido:any
@@ -14,6 +15,7 @@ export default function NovoItemModal({obterPedido}:Props) {
     const [sabores, setSabores] = useState<Sabor[]>()
     const [saborAtual, setSaborAtual] = useState<Sabor>()
     const [quantidade, setQuantidade] = useState<number>(1)
+    const [loading, setLoading] = useState(false)
   
     function mudarSabor(id:number){
         const sabor = sabores?.find(item => item.id === id)
@@ -32,6 +34,7 @@ export default function NovoItemModal({obterPedido}:Props) {
 
     async function salvar(event: React.MouseEvent<HTMLButtonElement>) {
         event.preventDefault()
+        setLoading(true)
         const nomeCliente = localStorage.getItem('nomeUsuario')?.toString()
         const dados:NovoItem = {
             nomeCliente: nomeCliente!,
@@ -43,8 +46,9 @@ export default function NovoItemModal({obterPedido}:Props) {
             obterPedido()
             setShowNovoItemModal(false)
             sucessMessage(response.data.mensagem)
+            setLoading(false)
         } catch (error: any) {
-            alert(error)
+            setLoading(false)
             erroMessage(error.response.data.mensagem)
         }
     }
@@ -59,46 +63,51 @@ export default function NovoItemModal({obterPedido}:Props) {
 
     return (
         <Modal isVisible={showNovoItemModal}>
-            <div className="flex flex-col bg-white w-full mx-10 h-52 shadow-lg rounded-lg" data-aos="zoom-in">
-                <h1 className="`flex font-black text-lg p-2 bg-azul text-laranja rounded-t-lg">
+            <div className="flex flex-col bg-white w-full h-52 shadow-lg rounded-lg items-center" 
+                        data-aos="zoom-in">
+                <h1 className="flex justify-center w-full font-black text-lg p-2 bg-azul text-laranja rounded-t-lg">
                     Novo pedido
                 </h1>
-                <form className='flex flex-col p-4 bg-white rounded-lg'>
-                    {sabores !== undefined 
-                        ? <select id="seletor"
-                                className='flex mb-4 font-md bg-gray-100 p-2 rounded-md'
-                                defaultValue={saborAtual!.id}
-                                onChange={(e) => mudarSabor(parseInt(e.target.value))}
-                            >
-                        {sabores!.map(option => (
-                          <option className='flex mb-4 bg-blue-200 my-2 font-sm bg-gray-100 p-2 rounded-md'
-                                    key={option.id} value={option.id}>
-                            {option.descricao} - R${option.preco.toFixed(2)}
-                          </option>
-                        ))}
-                        </select>
-                        : <></>
-                    }
-                     <input className='flex mb-4 bg-gray-100 p-2 rounded-md'
-                        type="number"
-                        placeholder='quantidade'
-                        name='quantidade'
-                        onChange={(e: any) => setQuantidade(e.target.value)}
-                        value={quantidade}
-                        required
-                    />
-                    <div className="flex">
-                        <button className='flex bg-blue-500 text-white font-white rounded-md p-2 mr-2'
-                            onClick={salvar}>
-                            Salvar
-                        </button>
-                        <button className='flex bg-red-500 text-white font-white rounded-md p-2'
-                            onClick={() => cancelar()}>
-                            Cancelar
-                        </button>
-    </div>
-                </form>
-
+                {!loading ? 
+                    <form className='flex w-full flex-col p-4 bg-white rounded-lg'>
+                        {sabores !== undefined 
+                            ? <select id="seletor"
+                                    className='flex mb-4 font-md bg-gray-100 p-2 rounded-md'
+                                    defaultValue={saborAtual!.id}
+                                    onChange={(e) => mudarSabor(parseInt(e.target.value))}
+                                >
+                            {sabores!.map(option => (
+                              <option className='flex mb-4 bg-blue-200 my-2 font-sm bg-gray-100 p-2 rounded-md'
+                                        key={option.id} value={option.id}>
+                                {option.descricao} - R${option.preco.toFixed(2)}
+                              </option>
+                            ))}
+                            </select>
+                            : <></>
+                        }
+                         <input className='flex mb-4 bg-gray-100 p-2 rounded-md'
+                            type="number"
+                            placeholder='quantidade'
+                            name='quantidade'
+                            onChange={(e: any) => setQuantidade(e.target.value)}
+                            value={quantidade}
+                            required
+                        />
+                        <div className="flex">
+                            <button className='flex bg-blue-500 text-white font-white rounded-md p-2 mr-2'
+                                onClick={salvar}>
+                                Salvar
+                            </button>
+                            <button className='flex bg-red-500 text-white font-white rounded-md p-2'
+                                onClick={() => cancelar()}>
+                                Cancelar
+                            </button>
+                        </div>
+                    </form>
+                    : <div className="flex w-full h-full items-center justify-center">
+                        <LoaderCircle/>
+                    </div>
+                }
             </div>
         </Modal>
     )
