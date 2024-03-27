@@ -12,7 +12,7 @@ export default function Pedido({dados}:Props){
             <div className='flex flex-col p-2 m-4 md:w-4/5 w-full rounded-md text-azul'>
                 <div className='flex flex-col bg-white shadow-md rounded-md w-full p-2 mb-4'>
                     <div className='flex justify-between'>
-                        <h1 className='flex text-2xl mb-4 font-bold'>
+                        <h1 className='flex text-lg mb-2 font-bold'>
                             PIX: {dados?.pix}
                         </h1>
                         <BotaoCopiar textToCopy={dados.pix}/>

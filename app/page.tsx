@@ -4,7 +4,7 @@ import 'aos/dist/aos.css'
 import Aos from 'aos'
 import { useEffect, useState } from "react";
 import Header from "./components/Header";
-import api, { NovoItem } from "./api/api-connection";
+import api from "./api/api-connection";
 import Pedido from "./components/Pedido";
 import { TbShoppingCartX } from "react-icons/tb";
 import { useGlobalContext } from "./contexts/Contexto"

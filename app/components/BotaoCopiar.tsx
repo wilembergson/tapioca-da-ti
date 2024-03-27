@@ -36,7 +36,7 @@ export default function BotaoCopiar({ textToCopy }:CopyButtonProps){
   }, [textToCopy]);
 
   return (
-    <button className='flex' ref={buttonRef}>
+    <button className='flex text-laranja' ref={buttonRef}>
         <ToastContainer/>
         <FaRegCopy size={28}/>
     </button>
