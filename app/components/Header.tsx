@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { FaPowerOff } from "react-icons/fa";
+import { LuSandwich } from "react-icons/lu";
 
 export default function Header(){
     const [nomeUsuario, setNomeUsuario] = useState<string|null>(null)
@@ -15,7 +16,8 @@ export default function Header(){
     }, [nomeUsuario])
     return(
         <header className="flex font-header bg-azul w-full justify-between py-4 px-2 shadow-md">
-            <h1 className="text-laranja text-2xl font-bold">
+            <h1 className="flex items-center text-laranja text-2xl font-bold">
+                <LuSandwich size={40}/>
                 Tapioca da T.I
             </h1>
             {nomeUsuario !== null ? 
