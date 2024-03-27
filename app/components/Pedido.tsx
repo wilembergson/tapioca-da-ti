@@ -13,7 +13,7 @@ export default function Pedido({dados}:Props){
                 <div className='flex flex-col bg-white shadow-md rounded-md w-full p-2 mb-4'>
                     <div className='flex justify-between'>
                         <h1 className='flex text-lg mb-2 font-bold'>
-                            PIX: {dados?.pix}
+                            PIX: {dados?.pix === "Editar PIX ->" ? "Já já aparece" : dados.pix}
                         </h1>
                         <BotaoCopiar textToCopy={dados.pix}/>
                     </div>
